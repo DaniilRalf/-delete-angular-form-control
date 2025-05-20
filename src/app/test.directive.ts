@@ -1,4 +1,4 @@
-import {Directive, Inject, Self} from '@angular/core';
+import {Directive, ElementRef, Inject, Optional, Self} from '@angular/core';
 import {NG_VALUE_ACCESSOR} from '@angular/forms';
 import {ChildComponent} from './child/child.component';
 
@@ -8,9 +8,11 @@ import {ChildComponent} from './child/child.component';
 export class TestDirective {
 
   constructor(
-    @Self() @Inject(NG_VALUE_ACCESSOR) private accessor: ChildComponent[]
+    @Self() @Optional() @Inject(NG_VALUE_ACCESSOR) private accessor: ChildComponent[],
+    @Self() @Optional() private elementRef:  ElementRef
   ) {
     console.log(this.accessor)
+    console.log(this.elementRef)
 
     setTimeout(() => {
       this.accessor[0].writeValue('asd')
